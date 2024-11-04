@@ -1,12 +1,10 @@
 class Solution {
     public int maxCount(int m, int n, int[][] ops) {
-    int row = m;
-    int col = n;
-    for (int i = 0; i < ops.length; i++) {
-        row = Math.min(row, ops[i][0]);
-        col = Math.min(col, ops[i][1]);
+    for (int[] op : ops) {
+        m = Math.min(m, op[0]);
+        n = Math.min(n, op[1]);
     }
 
-    return row * col;
+    return m * n;
     }
 }
