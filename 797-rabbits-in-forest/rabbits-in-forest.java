@@ -1,18 +1,20 @@
 class Solution {
-    public int numRabbits(int[] answers) {
-        HashMap<Integer,Integer> mp = new HashMap<>();
+    public int numRabbits(int[] arr) {
+        int l = arr.length;
+        int ans = 0;
+        int[] g = new int[1001];
+        for(int i = 0;i<l;i++){
+                int n = arr[i]+1;
+                if(g[n]>0){
+                    g[n]--;
+                }
+                else{
+                    ans+=n;
+                    g[n] = n-1;
+                }
 
-        for(int i=0;i<answers.length;i++) {
-            mp.put(answers[i],mp.getOrDefault(answers[i],0)+1);
-        }
-
-        int ans=0;
-        for(int key:mp.keySet()){
-            int grp_size = key+1;
-            int grps = (int)Math.ceil((mp.get(key)*1.0)/grp_size);
-            ans += grps * grp_size;
-        }
-
+            }
+        
         return ans;
     }
 }
