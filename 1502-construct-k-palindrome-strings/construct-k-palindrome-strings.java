@@ -4,8 +4,8 @@ class Solution {
         int[] freq = new int[26];
 
         for(char c:s.toCharArray()){
-            int i = c-'a';
-            freq[i]++;
+            //int i = c-'a';
+            freq[c-'a']++;
         }
 
         int odd = 0;
@@ -13,9 +13,7 @@ class Solution {
             if(freq[i]%2 !=0)odd++;
         }
 
-        if(odd > k)return false;
-        else
-            return true;
+        return odd <= k;
 
     }
 }
