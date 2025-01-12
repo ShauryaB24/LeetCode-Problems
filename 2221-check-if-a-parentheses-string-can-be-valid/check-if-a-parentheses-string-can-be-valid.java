@@ -1,16 +1,31 @@
 class Solution {
     public boolean canBeValid(String s, String locked) {
-        int length = s.length();
-        if (length % 2 != 0) return false;
-        int min = 0, max= 0;
-        for (int i = 0; i < length; i++) {
-            boolean isOpening = s.charAt(i) == '(';
-            boolean isUnlocked = locked.charAt(i) == '0';
-            min += (!isOpening || isUnlocked) ? -1 : 1;
-            max += (isOpening || isUnlocked) ? 1 : -1;
-            if (max < 0) return false;
-            min = Math.max(min, 0);
+        int n = s.length();
+        if (n % 2 != 0) {
+            return false;
         }
-        return min == 0;
+        int upper = 0;
+        int lower = 0;
+        for (int i = 0; i < n; i++) {
+            if (locked.charAt(i) == '1') {
+                if (s.charAt(i) == '(') {
+                    lower++;
+                    upper++;
+                } else {
+                    lower--;
+                    upper--;
+                }
+            } else {
+                upper++;
+                lower--;
+            }
+            if (lower < 0) {
+                lower += 2;
+            }
+            if (upper < 0) {
+                return false;
+            }
+        }
+        return lower == 0;
     }
 }
